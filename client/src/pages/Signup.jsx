@@ -1,45 +1,17 @@
-import React, { useState } from "react";
 import instagramLogo from "../assets/images/Logo-Instagram.png";
 import { FaFacebook } from "react-icons/fa";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { useEffect } from "react";
+
 function Signup() {
-  const [formData, setFormData] = useState({
-    username: "",
-    first_name: "",
-    last_name: "",
-    email: "",
-    password: "",
-  });
-  const navigate = useNavigate();
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
+  const fetchData = async () => {
+    const response = await fetch("http://localhost:8000/");
+    const data = await response.json();
+    console.log(data);
   };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    try {
-      const response = await fetch("http://127.0.0.1:8000/signup/", {
-        method: "POST",
-        headers: {
-          "Content-type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
-      if (response.ok) {
-        console.log("Sign up successful");
-        navigate("/");
-      }
-    } catch (error) {
-      console.log("Error signup", error);
-    }
-  };
-
+  useEffect(() => {
+    fetchData();
+  }, []);
   return (
     <div className="flex justify-center my-3">
       <div className="">
@@ -65,17 +37,15 @@ function Signup() {
           </button>
 
           <div className="form w-[300px] my-4">
-            <form onSubmit={handleSubmit}>
+            <form>
               <div className="mb-2">
                 <input
                   type="text"
                   id="username"
                   name="username"
-                  value={formData.username}
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                   placeholder="Username"
                   required
-                  onChange={handleChange}
                 />
               </div>
               <div className="mb-2">
@@ -83,11 +53,9 @@ function Signup() {
                   type="text"
                   id="first_name"
                   name="first_name"
-                  value={formData.first_name}
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                   placeholder="Firstname"
                   required
-                  onChange={handleChange}
                 />
               </div>
               <div className="mb-2">
@@ -95,11 +63,9 @@ function Signup() {
                   type="text"
                   id="last_name"
                   name="last_name"
-                  value={formData.last_name}
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                   placeholder="Lastname"
                   required
-                  onChange={handleChange}
                 />
               </div>
               <div className="mb-2">
@@ -107,11 +73,9 @@ function Signup() {
                   type="email"
                   id="email"
                   name="email"
-                  value={formData.email}
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                   placeholder="Email"
                   required
-                  onChange={handleChange}
                 />
               </div>
               <div className="mb-2">
@@ -119,11 +83,9 @@ function Signup() {
                   type="password"
                   id="password"
                   name="password"
-                  value={formData.password}
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                   placeholder="Password"
                   required
-                  onChange={handleChange}
                 />
               </div>
               <button

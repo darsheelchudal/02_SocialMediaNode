@@ -1,23 +1,8 @@
 import react from "react";
-import { useState, useEffect, Navigate } from "react";
 import dummy from "../assets/images/aditi.jpg";
-import instagramLogo from "../assets/images/Logo-Instagram.png";
-import { Link } from "react-router-dom";
 import Sidebar from "../components/sidebar";
 
 const Home = () => {
-  const [isAuthenticated, setIsAuthenticated] = useState(true);
-
-  useEffect(() => {
-    const token = localStorage.getItem("access_token");
-    if (!token) {
-      setIsAuthenticated(false);
-    }
-  }, []);
-
-  if (!isAuthenticated) {
-    return <Navigate to="/login" />;
-  }
   return (
     <>
       <div className="flex justify-between">
@@ -32,7 +17,7 @@ const Home = () => {
                 alt=""
                 srcset=""
               />
-              <p className="text-slate-500 text-center text-center">
+              <p className="text-slate-500 text-center">
                 <sm>aditi hydari</sm>
               </p>
             </div>
