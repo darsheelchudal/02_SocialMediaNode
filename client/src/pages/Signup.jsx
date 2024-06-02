@@ -4,14 +4,6 @@ import { Link } from "react-router-dom";
 import { useEffect } from "react";
 
 function Signup() {
-  const fetchData = async () => {
-    const response = await fetch("http://localhost:8000/");
-    const data = await response.json();
-    console.log(data);
-  };
-  useEffect(() => {
-    fetchData();
-  }, []);
   return (
     <div className="flex justify-center my-3">
       <div className="">
