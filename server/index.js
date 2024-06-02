@@ -1,5 +1,7 @@
 import express from "express";
 import mongoose from "mongoose";
+import { User } from "./models/User.js";
+import Auth from "./routes/Auth.js";
 
 const app = express();
 
@@ -20,3 +22,5 @@ mongoose.connection.on("error", () => {
 app.listen(PORT, () => {
   console.log(`Listening at PORT : ${PORT}`);
 });
+
+app.use("")
