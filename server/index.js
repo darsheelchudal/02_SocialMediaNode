@@ -1,19 +1,22 @@
 import express from "express";
-import data from "./data.js";
-import cors from "cors";
+import mongoose from "mongoose";
 
 const app = express();
 
 const PORT = 8000;
-app.use(cors());
+const MONGOURI =
+  "mongodb+srv://darsheelchudal11:darsheel@cluster0.i4rjtg0.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
 
-app.get("/", (req, res) => {
-  res.json(data);
+mongoose.connect(MONGOURI);
+
+mongoose.connection.on("connected", () => {
+  console.log("Successfully connected to mongoose");
 });
-app.get("/about", (req, res) => {
-  res.json("About page");
+
+mongoose.connection.on("error", () => {
+  console.log("Not connected to mongoose");
 });
 
 app.listen(PORT, () => {
-  console.log("Listening at port" + PORT);
+  console.log(`Listening at PORT : ${PORT}`);
 });
